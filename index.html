@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FEH Text Simulator</title>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+        <link rel="icon" type="image/x-icon" href="icon.ico">
+        <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Fire Emblem Heroes Text Simulator</h1>
+            <p>This text simulator is meant to be used with portraits from Fire Emblem Heroes.<br>Artwork of characters can be found in <a href="https://drive.google.com/drive/folders/1IzKJZAzSlRL31QkcA7tshBXJdBwsoJBA?usp=sharing" target="_blank">Kaz Kirigiri's FEH Art Collection</a> or the <a href="https://feheroes.fandom.com/wiki/Main_Page" target="_blank">FEH wiki</a>.<br>For best results, use character portraits that are 1600×1920 pixels.</p>
+        </div>
+        <hr>
+        <div id="wrapper">
+            <div class="container" id="canvas-container">
+                <canvas id="background-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="darken-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="background2-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="portrait-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="text-box-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="name-box-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="text-canvas" height="1920" width="1080"></canvas>
+                <canvas class="canvas-layer" id="hidden-canvas" height="1920" width="1080"></canvas>
+            </div>
+            <div class="container" id="options-container">
+                <label for="portrait-input" class="custom-label">Upload Portrait</label>
+                <input type="file" id="portrait-input" accept="image/*"/>
+                <br>
+                <br>
+                <label for="name-input">Name</label>
+                <input type="text" id="name-input" autocomplete="off"/>
+                <br>
+                <br>
+                <label for="text-input" id="text-label">Dialogue</label>
+                <textarea type="text" id="text-input" rows="3" cols="50" placeholder="Separate each line with a line break!"></textarea>
+                <br>
+                <select id="background-select-1">
+                    <option value="" selected>Select Background</option>
+                </select>
+                <select id="background-select-2">
+                    <option value="" selected>Dialogue Background</option>
+                </select>
+                <br>
+                <label for="background-input" class="custom-label">Upload Background</label>
+                <input type="file" id="background-input" accept="image/*"/>
+                <label for="darken-checkbox">Darken background</label>
+                <input type="checkbox" id="darken-checkbox"/> 
+                <br>
+                <label for="hide-checkbox">Hide text</label>
+                <input type="checkbox" id="hide-checkbox"/> 
+                <br>
+                <br>
+                <button id="save-button">Save Image</button>
+            </div>
+        </div>
+    </body>
+</html>
