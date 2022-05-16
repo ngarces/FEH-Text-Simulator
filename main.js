@@ -11,7 +11,6 @@ $.getJSON("backgrounds.json", function(data) {
     backgroundList = Object.keys(data).sort();
     var select = document.getElementById("background-select-1")
     populateSelect(select, backgroundList);
-    select.addEventListener('change', drawBackground);
 });
 
 $.getJSON("dialogue_backgrounds.json", function(data){
@@ -19,34 +18,37 @@ $.getJSON("dialogue_backgrounds.json", function(data){
     backgroundList2 = Object.keys(data).sort();
     var select = document.getElementById("background-select-2")
     populateSelect(select, backgroundList2);
-    select.addEventListener('change', drawDialogueBackground);
 });
 
 function drawBackground(){
     var ctx = document.getElementById("background-canvas").getContext("2d");
     var backgroundInput = document.getElementById("background-input");
     var backgroundSel = document.getElementById("background-select-1");
+    var backgroundSel2 = document.getElementById("background-select-2");
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     var backgroundImage = new Image();
 
     if (backgroundInput.value != ""){
-        backgroundSel.selectedIndex = 0;
         var file = backgroundInput.files[0];
         var reader = new FileReader();
+        backgroundSel.selectedIndex = 0;
+        backgroundSel2.selectedIndex = 0;
+        drawDialogueBackground();
         reader.readAsDataURL(file);
         reader.onloadend = function(e){
             backgroundImage.src = e.target.result;
         }
-        backgroundInput.value = null;
     }
     else if (backgroundSel.value != ""){
         backgroundImage.src = "Backgrounds/" + bgKeyVal1[backgroundSel.value];
     }
 
     backgroundImage.onload = function(){
+        var backgroundX = document.getElementById("background-x");
+        var backgroundY = document.getElementById("background-y");
         this.width *= canvasHeight / this.height;
         this.height = canvasHeight;
-        ctx.drawImage(backgroundImage,  (canvasWidth - this.width) / 2, (canvasHeight - this.height) / 2, this.width, this.height);
+        ctx.drawImage(backgroundImage, Number(backgroundX.value) + ((canvasWidth - this.width) / 2), Number(backgroundY.value) + ((canvasHeight - this.height) / 2), this.width, this.height);
     }
 }
 
@@ -122,7 +124,7 @@ function drawText(){
 
 function drawPortrait(){
     var ctx = document.getElementById("portrait-canvas").getContext("2d");
-    var portraitInput = document.getElementById("portrait-input")
+    var portraitInput = document.getElementById("portrait-input");
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     if (portraitInput.files){
         var file = portraitInput.files[0];
@@ -132,9 +134,11 @@ function drawPortrait(){
             var image = new Image();
             image.src = e.target.result;
             image.onload = function(){
+                var portraitX = document.getElementById("portrait-x");
+                var portraitY = document.getElementById("portrait-y");
                 this.width *= 1.25;
                 this.height *= 1.25;
-                ctx.drawImage(image, (canvasWidth - this.width) / 2, 0, this.width, this.height);
+                ctx.drawImage(image, Number(portraitX.value) + ((canvasWidth - this.width) / 2), portraitY.value, this.width, this.height);
             }
         }
     }
@@ -196,15 +200,25 @@ window.onload = function(){
     var textInput = document.getElementById("text-input");
     var portraitInput = document.getElementById("portrait-input");
     var backgroundInput = document.getElementById("background-input");
-    var backgroundSel = document.getElementById("background-select-2");
+    var backgroundSel = document.getElementById("background-select-1");
+    var backgroundSel2 = document.getElementById("background-select-2");
     var saveButton = document.getElementById("save-button");
     var darkenCheckbox = document.getElementById("darken-checkbox");
     var hideCheckbox = document.getElementById("hide-checkbox");
+    var portraitX = document.getElementById("portrait-x");
+    var portraitY = document.getElementById("portrait-y");
+    var backgroundX = document.getElementById("background-x");
+    var backgroundY = document.getElementById("background-y");
+
     nameInput.addEventListener('change', drawText);
     textInput.addEventListener('change', drawText);
     portraitInput.addEventListener('change', drawPortrait);
     backgroundInput.addEventListener('change', drawBackground);
-    backgroundSel.addEventListener('change', drawDialogueBackground);
+    backgroundSel.addEventListener('change', function(){
+        backgroundInput.value = "";
+        drawBackground();
+    });
+    backgroundSel2.addEventListener('change', drawDialogueBackground);
     saveButton.addEventListener('click', saveImage);
     darkenCheckbox.addEventListener('change', darkenBackground);
     hideCheckbox.addEventListener('change', function(){
@@ -212,6 +226,10 @@ window.onload = function(){
         drawNameBox();
         drawText();
     });
+    portraitX.addEventListener('change', drawPortrait);
+    portraitY.addEventListener('change', drawPortrait);
+    backgroundX.addEventListener('change', drawBackground);
+    backgroundY.addEventListener('change', drawBackground);
 
     drawAll();
 };
