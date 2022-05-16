@@ -14,7 +14,7 @@ h1{
 body{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    background: url(library_BG.png);
+    background: url(images/library_BG.webp);
     background-attachment: fixed;
     background-position: center;
     background-size: cover;

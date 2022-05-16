@@ -40,7 +40,7 @@ function drawBackground(){
         }
     }
     else if (backgroundSel.value != ""){
-        backgroundImage.src = "Backgrounds/" + bgKeyVal1[backgroundSel.value];
+        backgroundImage.src = "images/Backgrounds/" + bgKeyVal1[backgroundSel.value];
     }
 
     backgroundImage.onload = function(){
@@ -59,7 +59,7 @@ function drawDialogueBackground(){
     var backgroundImage = new Image();
 
     if (backgroundSel.value != ""){
-        backgroundImage.src = "Dialogue Backgrounds/" + bgKeyVal2[backgroundSel.value];
+        backgroundImage.src = "images/Dialogue Backgrounds/" + bgKeyVal2[backgroundSel.value];
     }
     backgroundImage.onload = function(){
         this.width = 1625;
@@ -78,7 +78,7 @@ function drawTextBox(){
     textBox.onload = function(){
         ctx.drawImage(textBox, 0, 1344);
     }
-    textBox.src = "Text box.png";
+    textBox.src = "images/Text box.png";
 }
 
 function drawNameBox(){
@@ -91,7 +91,7 @@ function drawNameBox(){
     nameBox.onload = function(){
         ctx.drawImage(nameBox, 14, 1142);
     }
-    nameBox.src = "Name box.png";
+    nameBox.src = "images/Name box.png";
 }
 
 function drawText(){
@@ -177,8 +177,6 @@ function darkenBackground(){
 }
 
 function drawAll(){
-    //drawBackground();
-    //drawPortrait();
     drawTextBox();
     drawNameBox();
     drawText();
@@ -221,11 +219,7 @@ window.onload = function(){
     backgroundSel2.addEventListener('change', drawDialogueBackground);
     saveButton.addEventListener('click', saveImage);
     darkenCheckbox.addEventListener('change', darkenBackground);
-    hideCheckbox.addEventListener('change', function(){
-        drawTextBox();
-        drawNameBox();
-        drawText();
-    });
+    hideCheckbox.addEventListener('change', drawAll);
     portraitX.addEventListener('change', drawPortrait);
     portraitY.addEventListener('change', drawPortrait);
     backgroundX.addEventListener('change', drawBackground);
