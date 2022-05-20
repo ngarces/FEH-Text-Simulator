@@ -6,16 +6,18 @@ var backgroundList2;
 var bgKeyVal1;
 var bgKeyVal2;
 
+var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
+
 $.getJSON("backgrounds.json", function(data) {      
     bgKeyVal1 = data; 
-    backgroundList = Object.keys(data).sort();
+    backgroundList = Object.keys(data).sort(collator.compare);
     var select = document.getElementById("background-select-1")
     populateSelect(select, backgroundList);
 });
 
 $.getJSON("dialogue_backgrounds.json", function(data){
     bgKeyVal2 = data;
-    backgroundList2 = Object.keys(data).sort();
+    backgroundList2 = Object.keys(data).sort(collator.compare);
     var select = document.getElementById("background-select-2")
     populateSelect(select, backgroundList2);
 });
