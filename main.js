@@ -211,7 +211,14 @@ window.onload = function(){
     var backgroundY = document.getElementById("background-y");
 
     nameInput.addEventListener('keydown', drawText);
+    nameInput.addEventListener('keyup', drawText);
+    nameInput.addEventListener('change', drawText);
+
     textInput.addEventListener('keydown', drawText);
+    textInput.addEventListener('keyup', drawText);
+    textInput.addEventListener('change', drawText);
+
+
     portraitInput.addEventListener('change', drawPortrait);
     backgroundInput.addEventListener('change', drawBackground);
     backgroundSel.addEventListener('change', function(){
