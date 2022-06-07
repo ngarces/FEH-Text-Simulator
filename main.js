@@ -210,8 +210,8 @@ window.onload = function(){
     var backgroundX = document.getElementById("background-x");
     var backgroundY = document.getElementById("background-y");
 
-    nameInput.addEventListener('change', drawText);
-    textInput.addEventListener('change', drawText);
+    nameInput.addEventListener('keydown', drawText);
+    textInput.addEventListener('keydown', drawText);
     portraitInput.addEventListener('change', drawPortrait);
     backgroundInput.addEventListener('change', drawBackground);
     backgroundSel.addEventListener('change', function(){
