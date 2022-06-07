@@ -210,14 +210,6 @@ window.onload = function(){
     var backgroundX = document.getElementById("background-x");
     var backgroundY = document.getElementById("background-y");
 
-    window.applicationCache.addEventListener('updateready', function(e) {
-        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-            //New update available
-            window.applicationCache.swapCache();
-            window.location.reload();
-        }
-      });
-
     nameInput.addEventListener('keydown', drawText);
     textInput.addEventListener('keydown', drawText);
     portraitInput.addEventListener('change', drawPortrait);
